@@ -1,0 +1,62 @@
+<section class="user-dashboard">
+  <h2>Welcome, {{user.username}}!</h2>
+
+  {{#if user.drinks}}
+  <h2>Your Drinks</h2>
+  <section class="drink-list">
+    {{#each user.drinks as |drink|}}
+    {{> user-drink-deets}}
+    {{/each}}
+    <button id="addDrinkBtn">Add New Drink</button>
+  </section>
+  {{else}}
+  <section class="no-drink-section">
+    <p>Is your favorite caffeinated beverage not already in our database? Push the button below to add a drink to the database and then you can leave its first rating, maybe even a review too!</p>
+    <button id="addDrinkBtn">Add New Drink</button>
+  </section>
+  {{/if}}
+
+{{#if user.ratings}}
+  <h3>Your Ratings</h3>
+  <section class="rating-list">
+    {{#each user.ratings as |rating|}}
+    {{> user-rating-deets}}
+    {{/each}}
+  </section>
+  {{else}}
+  <section class="no-rating-section">
+    <p>You haven't rated any of your favorite caffeinated beverages yet! If you have any drinks added above, you can rate those! Otherwise, click on any of the drinks in our database that you'll find on the homepage to rate it, and maybe review it as well!</p>
+  </section>
+  {{/if}}
+</section>
+
+{{!-- Modal for adding drinks. See public/js/addDrink.js --}}
+{{!-- May be possible to combine this with review-modal partial --}}
+<section id="addDrinkModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+
+    <h2>Add Beverage</h2>
+
+    <form class="drink-form">
+      <div class="form-group">
+        <label>Beverage Name:</label>
+        <input type="text" id="beverageName" name="beverage" placeholder="Folger's French Vanilla Roast" required>
+      </div>
+      <div class="form-group">
+        <label>Beverage Type:</label>
+        <input type="text" id="beverageType" name="bev_type" placeholder="Coffee, Energy Drink, Soda, Etc." required>
+      </div>
+      <div class="form-group">
+        <button class="btn" type="submit">Add Drink</button>
+      </div>
+    </form>
+  </div>
+  <input type="hidden" name="user_id" value="{{user_id}}">
+</section>
+
+{{> review-modal}}
+{{> edit-review-modal}}
+
+<script src="/js/reviewDrink.js"></script>
+<script src="/js/addDrink.js"></script>

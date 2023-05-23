@@ -1,0 +1,19 @@
+<section>
+    <section>
+        <h2>{{drink.beverage}}</h2>
+        <p>Current rating: {{drink.current_rating}}</p>
+        <h2>Reviews:</h2>
+        {{!-- Named rate instead of rating to avoid naming conflict --}}
+        {{#each drink.ratings as |rate|}}
+        <section>
+            <h3>{{user.username}}</h3>
+            <p>{{rating}}</p>
+            {{#if review}}
+            <p>{{review}}</p>
+            {{else}}
+            <p>No review</p>
+            {{/if}}
+        </section>
+        {{/each}}
+    </section>
+</section>
